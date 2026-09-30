@@ -1,0 +1,13 @@
+groups:
+- name: data-quality
+  rules:
+  - alert: DataQualityScoreLow
+    expr: data_quality_quality_score < 95
+    for: 5m
+    labels: {severity: warning}
+    annotations: {summary: "Data quality score below SLA"}
+  - alert: DataFreshnessViolation
+    expr: data_quality_freshness_minutes >= 120
+    for: 5m
+    labels: {severity: critical}
+    annotations: {summary: "Dataset freshness SLA violated"}
